@@ -14,9 +14,7 @@ const Searchbar = ({ onSubmit }) => {
   };
 
   const resetForm = () => {
-    this.setState({
-      imageSearchName: '',
-    });
+    setImageSearchName('');
   };
 
   const handleSubmit = event => {

@@ -1,14 +1,12 @@
-// import { Component } from 'react';
 import { useEffect } from 'react';
 import css from './Modal.module.css';
 
-const Modal = ({ closeModal }) => {
+const Modal = ({ closeModal, children }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleClickByEsc);
-  });
-
-  useEffect(() => {
-    window.removeEventListener('keydown', handleClickByEsc);
+    return () => {
+      window.removeEventListener('keydown', handleClickByEsc);
+    };
   });
 
   const handleClickByEsc = evt => {
@@ -25,7 +23,7 @@ const Modal = ({ closeModal }) => {
 
   return (
     <div className={css.overlay} onClick={handleClickBackdrop}>
-      <div className={css.modal}>{this.props.children}</div>
+      <div className={css.modal}>{children}</div>
     </div>
   );
 };
