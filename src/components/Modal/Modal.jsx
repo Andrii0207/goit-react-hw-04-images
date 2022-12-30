@@ -1,34 +1,65 @@
-import { Component } from 'react';
+// import { Component } from 'react';
+import { useEffect } from 'react';
 import css from './Modal.module.css';
 
-class Modal extends Component {
-  componentDidMount = () => {
-    window.addEventListener('keydown', this.handleClickByEsc);
-  };
+const Modal = ({ closeModal }) => {
+  useEffect(() => {
+    window.addEventListener('keydown', handleClickByEsc);
+  });
 
-  componentWillUnmount = () => {
-    window.removeEventListener('keydown', this.handleClickByEsc);
-  };
+  useEffect(() => {
+    window.removeEventListener('keydown', handleClickByEsc);
+  });
 
-  handleClickByEsc = evt => {
+  const handleClickByEsc = evt => {
     if (evt.code === 'Escape') {
-      this.props.closeModal();
+      closeModal();
     }
   };
 
-  handleClickBackdrop = evt => {
+  const handleClickBackdrop = evt => {
     if (evt.currentTarget === evt.target) {
-      this.props.closeModal();
+      closeModal();
     }
   };
 
-  render() {
-    return (
-      <div className={css.overlay} onClick={this.handleClickBackdrop}>
-        <div className={css.modal}>{this.props.children}</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={css.overlay} onClick={handleClickBackdrop}>
+      <div className={css.modal}>{this.props.children}</div>
+    </div>
+  );
+};
 
 export default Modal;
+
+// class Modal extends Component {
+// componentDidMount = () => {
+//   window.addEventListener('keydown', this.handleClickByEsc);
+// };
+
+//   componentWillUnmount = () => {
+// window.removeEventListener('keydown', this.handleClickByEsc);
+//   };
+
+//   handleClickByEsc = evt => {
+//     if (evt.code === 'Escape') {
+//       this.props.closeModal();
+//     }
+//   };
+
+//   handleClickBackdrop = evt => {
+//     if (evt.currentTarget === evt.target) {
+//       this.props.closeModal();
+//     }
+//   };
+
+//   render() {
+//     return (
+//       <div className={css.overlay} onClick={this.handleClickBackdrop}>
+//         <div className={css.modal}>{this.props.children}</div>
+//       </div>
+//     );
+//   }
+// }
+
+// export default Modal;
